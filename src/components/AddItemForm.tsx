@@ -26,13 +26,11 @@ export const AddItemForm = (props: AddItemFormType) => {
     }
     return (
         <div>
-            <div>
-                <input value={title}
-                       onChange={onChangeHandler}
-                       onKeyPress={onKeyPressHandler}
-                       className={error ? "error" : ""}
-                />
-            </div>
+            <input value={title}
+                   onChange={onChangeHandler}
+                   onKeyPress={onKeyPressHandler}
+                   className={error ? "error" : ""}
+            />
             <button onClick={addTaskHandlerForAddTitle}>+</button>
         </div>
     );

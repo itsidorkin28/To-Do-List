@@ -1,67 +1,69 @@
-
-
 .App {
     margin: 30px;
-    display: flex;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    div {
-        margin-right: 15px;
-        margin-bottom: 15px;
-    }
-}
-
-.Todolist {
-    border: 1px solid silver;
-    padding: 15px;
-
-
-    .todolistTitle {
+    .appTodolist {
         display: flex;
-        flex-direction: row;
-        margin: 5px 0;
-        h3 {
-            display: block;
-            margin: 0;
-        }
-        button {
-            margin-left: 5px;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        margin-top: 15px;
+        div {
+            margin-right: 15px;
+            margin-bottom: 15px;
         }
     }
 
-    .AddItemForm {
-        div {
+    .Todolist {
+        border: 1px solid silver;
+        padding: 15px;
+
+
+        .todolistTitle {
             display: flex;
             flex-direction: row;
-            margin: 0;
+            margin: 5px 0;
+            h3 {
+                display: block;
+                margin: 0;
+            }
             button {
                 margin-left: 5px;
             }
         }
+
+        .AddItemForm {
+            div {
+                display: flex;
+                flex-direction: row;
+                margin: 0;
+                button {
+                    margin-left: 5px;
+                }
+            }
+        }
+        .error {
+            border: red 2px solid;
+        }
+
+        .error-message {
+            color: red;
+        }
+
+        .activeFilter {
+            background-color: cadetblue;
+        }
+
+        .is-done {
+            opacity: 0.5;
+        }
+
+        .filterButtons {
+            display: flex;
+            justify-content: space-between;
+            margin: 0;
+        }
     }
 
-    .error {
-        border: red 2px solid;
-    }
-
-    .error-message {
-        color: red;
-    }
-
-    .activeFilter {
-        background-color: cadetblue;
-    }
-
-    .is-done {
-        opacity: 0.5;
-    }
-
-    .filterButtons {
-        display: flex;
-        justify-content: space-between;
-        margin: 0;
-    }
 }
+
 
 
 
