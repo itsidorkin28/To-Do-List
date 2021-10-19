@@ -29,19 +29,19 @@
         }
     }
 
-    .todolistInput {
-        display: flex;
-        flex-direction: row;
+    .AddItemForm {
         div {
+            display: flex;
+            flex-direction: row;
             margin: 0;
-        }
-        button {
-            margin-left: 5px;
+            button {
+                margin-left: 5px;
+            }
         }
     }
 
     .error {
-        border: red 1px solid;
+        border: red 2px solid;
     }
 
     .error-message {

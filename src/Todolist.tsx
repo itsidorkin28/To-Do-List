@@ -1,7 +1,7 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent} from 'react';
 import {FilterValuesType} from './App';
 import Button from "./components/Button";
-import Input from "./components/Input";
+import {AddItemForm} from "./components/AddItemForm";
 
 export type TaskType = {
     id: string
@@ -22,19 +22,6 @@ type PropsType = {
 }
 
 export function Todolist(props: PropsType) {
-    let [title, setTitle] = useState("")
-    let [error, setError] = useState<boolean>(false)
-    console.log(title)
-
-    const addTaskHandlerForAddTitle = () => {
-        if (title.trim()) {
-            props.addTask(props.todolistID, title.trim())
-            setTitle("");
-        } else {
-            setError(true);
-        }
-    }
-
     const onClickHandlerForRemoveTodolist = () => {
         props.removeTodolist(props.todolistID)
     }
@@ -45,15 +32,17 @@ export function Todolist(props: PropsType) {
         props.removeTask(props.todolistID, Tid)
     }
 
+    const addTaskHandler = (title: string) => props.addTask(props.todolistID, title)
+
+
     return <div className='Todolist'>
         <div className='todolistTitle'>
             <h3>{props.title}</h3>
             <Button callBack={onClickHandlerForRemoveTodolist} name={'x'}/>
         </div>
 
-        <div className='todolistInput'>
-            <Input title={title} setTitle={setTitle} addTask={addTaskHandlerForAddTitle} error={error} setError={setError}/>
-            <Button callBack={addTaskHandlerForAddTitle} name={'+'}/>
+        <div className='AddItemForm'>
+            <AddItemForm callBack={addTaskHandler}/>
         </div>
 
 
