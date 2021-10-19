@@ -70,6 +70,7 @@ function App() {
     }
     return (
         <div className="App">
+            ADD TO DO LIST
             <AddItemForm callBack={addTodolist}/>
             <div className="appTodolist">
 
