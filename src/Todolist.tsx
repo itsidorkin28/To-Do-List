@@ -51,8 +51,6 @@ export function Todolist(props: PropsType) {
                 <Delete/>
             </IconButton>
         </h3>
-
-
         <AddItemForm callBack={addTaskHandler}/>
         <div>
         <ul>
