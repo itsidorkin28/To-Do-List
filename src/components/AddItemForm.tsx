@@ -1,4 +1,6 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import {IconButton, TextField} from "@mui/material";
+import {ControlPoint} from "@mui/icons-material";
 
 type AddItemFormType = {
     callBack: (title: string) => void
@@ -26,12 +28,17 @@ export const AddItemForm = (props: AddItemFormType) => {
     }
     return (
         <div>
-            <input value={title}
-                   onChange={onChangeHandler}
-                   onKeyPress={onKeyPressHandler}
-                   className={error ? "error" : ""}
+            <TextField
+                value={title}
+                onChange={onChangeHandler}
+                onKeyPress={onKeyPressHandler}
+                error={!!error}
+                variant={'outlined'}
+                label={'Type value'}
             />
-            <button onClick={addTaskHandlerForAddTitle}>+</button>
+            <IconButton onClick={addTaskHandlerForAddTitle} color={'primary'}>
+                <ControlPoint/>
+            </IconButton>
         </div>
     );
 };
