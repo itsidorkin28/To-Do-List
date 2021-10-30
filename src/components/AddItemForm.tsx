@@ -32,9 +32,9 @@ export const AddItemForm = (props: AddItemFormType) => {
                 value={title}
                 onChange={onChangeHandler}
                 onKeyPress={onKeyPressHandler}
-                error={!!error}
+                error={error}
                 variant={'outlined'}
-                label={'Type value'}
+                label={error ? 'Incorrect title' : 'Type title'}
             />
             <IconButton onClick={addTaskHandlerForAddTitle} color={'primary'}>
                 <ControlPoint/>

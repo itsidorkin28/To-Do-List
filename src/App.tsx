@@ -7,14 +7,14 @@ import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography}
 import {Menu} from '@mui/icons-material';
 
 export type FilterValuesType = "all" | "active" | "completed";
-export  type todolistsType = { id: string, title: string, filter: FilterValuesType };
+export type TodolistsType = { id: string, title: string, filter: FilterValuesType };
 type TasksType = { [key: string]: Array<TaskType> }
 
 function App() {
     let todolistID1 = v1();
     let todolistID2 = v1();
 
-    let [todolists, setTodolists] = useState<Array<todolistsType>>([
+    let [todolists, setTodolists] = useState<Array<TodolistsType>>([
         {id: todolistID1, title: 'What to learn', filter: 'all'},
         {id: todolistID2, title: 'What to buy', filter: 'all'},
     ])
@@ -84,7 +84,7 @@ function App() {
                         <Menu/>
                     </IconButton>
                     <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
-                        News
+                        TO DO LIST
                     </Typography>
                     <Button color="inherit">Login</Button>
                 </Toolbar>
