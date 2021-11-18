@@ -4,13 +4,7 @@ import {v1} from "uuid";
 export type TodolistsType = { id: string, title: string, filter: FilterValuesType };
 type ActionsTypes = RemoveTodolistACType | AddTodolistACType | ChangeTodolistTitleACType | changeTodolistFilterACType
 
-export let todolistID1 = v1();
-export let todolistID2 = v1();
-
-const initialState: Array<TodolistsType> = [
-    {id: todolistID1, title: 'What to learn', filter: 'all'},
-    {id: todolistID2, title: 'What to buy', filter: 'all'},
-]
+const initialState: Array<TodolistsType> = []
 
 export const todolistsReducer = (state = initialState, action: ActionsTypes): Array<TodolistsType> => {
     switch (action.type) {
