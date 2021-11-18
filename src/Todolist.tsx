@@ -53,27 +53,27 @@ export function Todolist(props: PropsType) {
         </h3>
         <AddItemForm callBack={addTaskHandler}/>
         <div>
-        <ul>
-            {
-                props.tasks.map(t => {
-                    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-                        props.changeTaskStatus(props.todolistID, t.id, e.currentTarget.checked);
-                    }
+            <ul>
+                {
+                    props.tasks.map(t => {
+                        const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+                            props.changeTaskStatus(props.todolistID, t.id, e.currentTarget.checked);
+                        }
 
-                    return <li key={t.id} className={t.isDone ? "is-done" : ""}>
-                        <Checkbox
-                            onChange={onChangeHandler}
-                            checked={t.isDone}/>
-                        <EditableSpan title={t.title} callBack={(title: string) => updateTaskHandler(t.id, title)}/>
+                        return <li key={t.id} className={t.isDone ? "is-done" : ""}>
+                            <Checkbox
+                                onChange={onChangeHandler}
+                                checked={t.isDone}/>
+                            <EditableSpan title={t.title} callBack={(title: string) => updateTaskHandler(t.id, title)}/>
 
-                        <IconButton onClick={() => onClickHandlerForRemove(t.id)}>
-                            <Delete/>
-                        </IconButton>
+                            <IconButton onClick={() => onClickHandlerForRemove(t.id)}>
+                                <Delete/>
+                            </IconButton>
 
-                    </li>
-                })
-            }
-        </ul>
+                        </li>
+                    })
+                }
+            </ul>
         </div>
         <div>
 
