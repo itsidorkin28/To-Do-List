@@ -124,7 +124,7 @@ export const AppWithReducers = () => {
                                         filter={m.filter}
                                         removeTodolist={removeTodolist}
                                         updateTask={updateTask}
-                                        updateTodolist={updateTodolist}
+                                        changeTodolistTitle={updateTodolist}
                                     />
                                 </Paper>
                             </Grid>

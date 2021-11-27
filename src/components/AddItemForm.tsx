@@ -1,4 +1,4 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import React, {ChangeEvent, KeyboardEvent, useCallback, useState} from 'react';
 import {IconButton, TextField} from "@mui/material";
 import {ControlPoint} from "@mui/icons-material";
 
@@ -6,17 +6,17 @@ type AddItemFormType = {
     callBack: (title: string) => void
 }
 
-export const AddItemForm = (props: AddItemFormType) => {
+export const AddItemForm = React.memo(({callBack}: AddItemFormType) => {
     let [title, setTitle] = useState("")
     let [error, setError] = useState<boolean>(false)
-    const addTaskHandlerForAddTitle = () => {
+    const addTaskHandlerForAddTitle = useCallback(() => {
         if (title.trim()) {
-            props.callBack(title.trim())
+            callBack(title.trim())
             setTitle("");
         } else {
             setError(true);
         }
-    }
+    }, [callBack])
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setError(false)
         setTitle(e.currentTarget.value)
@@ -41,5 +41,5 @@ export const AddItemForm = (props: AddItemFormType) => {
             </IconButton>
         </div>
     );
-};
+})
 
