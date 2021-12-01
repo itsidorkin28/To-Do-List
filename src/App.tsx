@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import './App.scss';
+import './App.css';
 import {TaskType, Todolist} from './Todolist';
 import {v1} from 'uuid';
 import {AddItemForm} from "./components/AddItemForm";
@@ -11,11 +11,11 @@ import { TasksType } from './state/tasks-reducer';
 export type FilterValuesType = "all" | "active" | "completed";
 
 function App() {
-    let todolistID1 = v1();
+        let todolistID1 = v1();
     let todolistID2 = v1();
 
-    let [todolists, setTodolists] = useState<Array<TodolistsType>>([
-        {id: todolistID1, title: 'What to learn', filter: 'all'},
+      let [todolists, setTodolists] = useState<Array<TodolistsType>>([
+        {id:   todolistID1, title: 'What to learn', filter: 'all'},
         {id: todolistID2, title: 'What to buy', filter: 'all'},
     ])
 

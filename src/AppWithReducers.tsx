@@ -1,5 +1,5 @@
 import React, {useReducer, useState} from 'react';
-import './App.scss';
+import './App.css';
 import {TaskType, Todolist} from './Todolist';
 import {v1} from 'uuid';
 import {AddItemForm} from "./components/AddItemForm";

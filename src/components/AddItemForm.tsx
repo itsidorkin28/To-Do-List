@@ -2,7 +2,7 @@ import React, {ChangeEvent, KeyboardEvent, useCallback, useState} from 'react';
 import {IconButton, TextField} from "@mui/material";
 import {ControlPoint} from "@mui/icons-material";
 
-type AddItemFormType = {
+export type AddItemFormType = {
     callBack: (title: string) => void
 }
 
