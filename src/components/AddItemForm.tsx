@@ -16,7 +16,7 @@ export const AddItemForm = React.memo(({callBack}: AddItemFormType) => {
         } else {
             setError(true);
         }
-    }, [callBack])
+    }, [title, callBack])
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setError(false)
         setTitle(e.currentTarget.value)

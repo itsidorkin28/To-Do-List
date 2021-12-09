@@ -17,7 +17,7 @@ export const EditableSpan = React.memo(({title, callBack}: EditableSpanType) => 
     const editFalse = useCallback(() => {
         setEdit(false)
         callBack(newTitle)
-    }, [callBack])
+    }, [callBack, newTitle])
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
             editFalse()

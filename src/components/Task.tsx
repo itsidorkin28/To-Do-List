@@ -15,7 +15,7 @@ type TaskPropsType = {
 export const Task = React.memo(({task, updateTask, removeTask, changeTaskStatus, todolistID}: TaskPropsType) => {
     const onChangeHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         changeTaskStatus(todolistID, task.id, e.currentTarget.checked);
-    }, [todolistID, task.id])
+    }, [changeTaskStatus, todolistID, task.id])
 
     return <li className={task.isDone ? "is-done" : ""}>
         <Checkbox
