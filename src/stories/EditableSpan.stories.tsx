@@ -16,7 +16,6 @@ export const EditableSpanStory = Template.bind({});
 EditableSpanStory.args = {
   title: 'Some text',
   callBack: action('onChange')
-
 };
 
 
