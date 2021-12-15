@@ -16,11 +16,23 @@ export const todolistApi = {
         return instance.post<CommonResponseType<{ item: TodolistType }>>('todo-lists', {title: '1111'})
     },
     deleteTodo(todolistId: string) {
-        return axios.delete<CommonResponseType<{}>>(`todo-lists/${todolistId}`)
+        return instance.delete<CommonResponseType<{}>>(`todo-lists/${todolistId}`)
     },
     updateTodoTitle(todolistId: string, title: string) {
-        return axios.put<CommonResponseType<{}>>(`todo-lists/${todolistId}`, {title})
+        return instance.put<CommonResponseType<{}>>(`todo-lists/${todolistId}`, {title})
     },
+    getTasks(todolistId: string) {
+        return instance.get<GetTasksResponseType>(`todo-lists/${todolistId}/tasks`)
+    },
+    deleteTask(todolistId: string, taskId: string) {
+        return instance.delete<CommonResponseType<{}>>(`todo-lists/${todolistId}/tasks/${taskId}`)
+    },
+    createTask(todolistId: string, title: string) {
+        return instance.post<CommonResponseType<{ item: TaskType }>>(`todo-lists/${todolistId}/tasks/`, {title})
+    },
+    updateTask(todolistId: string, taskId: string, model: TaskModelType) {
+        return instance.put<CommonResponseType<{}>>(`todo-lists/${todolistId}/tasks/${taskId}`, model)
+    }
 }
 
 type CommonResponseType<T> = {
@@ -64,3 +76,17 @@ export type TaskType = {
     addedDate: string
 }
 
+export type TaskModelType = {
+    description: string
+    title: string
+    status: TaskStatuses
+    priority: TaskPriorities
+    startDate: string
+    deadline: string
+}
+
+type GetTasksResponseType = {
+    items: Array<TaskType>
+    totalCount: number
+    error: string
+}
