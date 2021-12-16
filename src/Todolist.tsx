@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {AddItemForm} from "./components/AddItemForm";
 import {EditableSpan} from "./components/EditableSpan";
 import {Button, IconButton} from "@mui/material";
@@ -6,6 +6,8 @@ import {Delete} from '@mui/icons-material';
 import {Task} from './components/Task';
 import { FilterValuesType } from './state/todolists-reducer';
 import {TaskStatuses, TaskType} from './api/todolist-api';
+import { useDispatch } from 'react-redux';
+import {setTasksThunk} from "./state/tasks-reducer";
 
 type PropsType = {
     todolistID: string
@@ -22,6 +24,11 @@ type PropsType = {
 }
 
 export const Todolist = React.memo((props: PropsType) => {
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(setTasksThunk(props.todolistID))
+    }, [])
+
     const onClickHandlerForRemoveTodolist = useCallback(() => {
         props.removeTodolist(props.todolistID)
     }, [ props.removeTodolist, props.todolistID])
@@ -80,3 +87,5 @@ export const Todolist = React.memo((props: PropsType) => {
         </div>
     </div>
 })
+
+
