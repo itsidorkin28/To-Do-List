@@ -7,8 +7,8 @@ import {
     setTasks,
     tasksReducer,
     TasksStateType
-} from "../tasks-reducer";
-import {addTodolist, removeTodolist, setTodolists} from "../todolists-reducer";
+} from "./tasks-reducer";
+import {addTodolist, removeTodolist, setTodolists} from "./todolists-reducer";
 
 let startState: TasksStateType
 
@@ -167,7 +167,19 @@ test('correct task should be deleted from correct array', () => {
 });
 
 test('correct task should be added to correct array', () => {
-    const action = addTask("juce", "todolistId2");
+    const task = {
+        id: '0',
+        title: 'juce',
+        status: TaskStatuses.New,
+        todoListId: 'todolistId2',
+        startDate: '',
+        deadline: '',
+        addedDate: '',
+        order: 0,
+        priority: TaskPriorities.Low,
+        description: '',
+    }
+    const action = addTask(task);
     const endState = tasksReducer(startState, action)
 
     expect(endState["todolistId1"].length).toBe(3);
@@ -196,7 +208,7 @@ test('title of specified task should be changed', () => {
 });
 
 test('new array should be added when new todolist is added', () => {
-    const action = addTodolist("new todolist");
+    const action = addTodolist("new todolist", "todolistId3");
     const endState = tasksReducer(startState, action)
 
 

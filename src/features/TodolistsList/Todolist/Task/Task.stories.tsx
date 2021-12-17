@@ -1,9 +1,8 @@
 import React from 'react';
 import {ComponentStory, ComponentMeta} from '@storybook/react';
 import {action} from "@storybook/addon-actions";
-import {Task} from "../components/Task";
-import {TaskPriorities, TaskStatuses} from "../api/todolist-api";
-import {v1} from "uuid";
+import {Task} from "./Task";
+import {TaskPriorities, TaskStatuses} from "../../../../api/todolist-api";
 
 
 export default {
@@ -36,7 +35,7 @@ TaskIsDoneStory.args = {
         priority: TaskPriorities.Low,
         description: '',
     },
-    todolistID: '1d23df4',
+    todolistId: '1d23df4',
 }
 
 export const TaskIsNotDoneStory = Template.bind({});
@@ -54,7 +53,7 @@ TaskIsNotDoneStory.args = {
         priority: TaskPriorities.Low,
         description: '',
     },
-    todolistID: '2d23df4',
+    todolistId: '2d23df4',
 }
 
 

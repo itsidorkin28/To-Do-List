@@ -5,7 +5,7 @@ import {
     changeTodolistTitle, FilterValuesType, setTodolists,
     TodolistDomainType,
     todolistsReducer,
-} from "../todolists-reducer";
+} from "./todolists-reducer";
 
 let todolistID1: string
 let todolistID2: string

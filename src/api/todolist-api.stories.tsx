@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {TaskPriorities, TaskStatuses, TaskModelType, todolistApi} from '../api/todolist-api'
+import {TaskPriorities, TaskStatuses, TaskModelType, todolistApi} from './todolist-api'
 
 export default {
     title: 'API'
@@ -20,7 +20,7 @@ export const GetTodolists = () => {
 export const CreateTodolist = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
-        todolistApi.createTodo()
+        todolistApi.createTodo('New todolist')
             .then(res => {
                 setState(res.data)
             })

@@ -9,7 +9,7 @@ export type AddItemFormType = {
 export const AddItemForm = React.memo(({callBack}: AddItemFormType) => {
     let [title, setTitle] = useState("")
     let [error, setError] = useState<boolean>(false)
-    const addTaskHandlerForAddTitle = useCallback(() => {
+    const onClickAddHandler = useCallback(() => {
         if (title.trim()) {
             callBack(title.trim())
             setTitle("");
@@ -23,7 +23,7 @@ export const AddItemForm = React.memo(({callBack}: AddItemFormType) => {
     }
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
-            addTaskHandlerForAddTitle();
+            onClickAddHandler();
         }
     }
     return (
@@ -36,7 +36,7 @@ export const AddItemForm = React.memo(({callBack}: AddItemFormType) => {
                 variant={'outlined'}
                 label={error ? 'Incorrect title' : 'Type title'}
             />
-            <IconButton onClick={addTaskHandlerForAddTitle} color={'primary'}>
+            <IconButton onClick={onClickAddHandler} color={'primary'}>
                 <ControlPoint/>
             </IconButton>
         </div>
