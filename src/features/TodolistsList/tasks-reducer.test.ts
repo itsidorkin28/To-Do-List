@@ -1,8 +1,7 @@
 import {TaskPriorities, TaskStatuses} from "../../api/todolist-api";
 import {
     addTask,
-    changeTaskStatus,
-    changeTaskTitle,
+    changeTask,
     removeTask,
     setTasks,
     tasksReducer,
@@ -190,7 +189,7 @@ test('correct task should be added to correct array', () => {
 })
 
 test('status of specified task should be changed', () => {
-    const action = changeTaskStatus("2", TaskStatuses.New, "todolistId2");
+    const action = changeTask("2", {status: TaskStatuses.New}, "todolistId2");
     const endState = tasksReducer(startState, action)
 
     expect(endState["todolistId2"].length).toBe(3);
@@ -199,7 +198,7 @@ test('status of specified task should be changed', () => {
 });
 
 test('title of specified task should be changed', () => {
-    const action = changeTaskTitle("1", 'Vue', "todolistId1");
+    const action = changeTask("1", {title: 'Vue'}, "todolistId1");
     const endState = tasksReducer(startState, action)
 
     expect(endState["todolistId1"].length).toBe(3);
@@ -208,7 +207,8 @@ test('title of specified task should be changed', () => {
 });
 
 test('new array should be added when new todolist is added', () => {
-    const action = addTodolist("new todolist", "todolistId3");
+    const newTodolist =  {id: 'todolistId3', title: 'New todolist', filter: 'all', addedDate: '', order: 0}
+    const action = addTodolist(newTodolist);
     const endState = tasksReducer(startState, action)
 
 

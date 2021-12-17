@@ -11,7 +11,7 @@ export default {
     args: {
         changeTaskStatus: action('changeTaskStatus'),
         removeTask: action('removeTask'),
-        updateTask: action('updateTask'),
+        changeTask: action('updateTask'),
     }
 } as ComponentMeta<typeof Task>;
 

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {TaskPriorities, TaskStatuses, TaskModelType, todolistApi} from './todolist-api'
+import {TaskPriorities, TaskStatuses, ChangeTaskModelType, todolistApi} from './todolist-api'
 
 export default {
     title: 'API'
@@ -8,7 +8,7 @@ export default {
 export const GetTodolists = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
-        todolistApi.getTodos()
+        todolistApi.getTodolists()
             .then((res) => {
                 setState(res.data)
             })
@@ -20,7 +20,7 @@ export const GetTodolists = () => {
 export const CreateTodolist = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
-        todolistApi.createTodo('New todolist')
+        todolistApi.addTodolist('New todolist')
             .then(res => {
                 setState(res.data)
             })
@@ -32,7 +32,7 @@ export const DeleteTodolist = () => {
     const [state, setState] = useState<any>(null)
     const todolistId = 'a6af2cde-0264-4d53-a1fb-bfc00e2a6bcc'
     useEffect(() => {
-        todolistApi.deleteTodo(todolistId)
+        todolistApi.removeTodolist(todolistId)
             .then(res => {
 
             })
@@ -45,7 +45,7 @@ export const UpdateTodolistTitle = () => {
     const todolistId = '19c7fd35-2bf7-4914-b787-20d14fb68b49'
     const title = '33'
     useEffect(() => {
-        todolistApi.updateTodoTitle(todolistId, title)
+        todolistApi.changeTodolistTitle(todolistId, title)
             .then(res => {
 
             })
@@ -74,7 +74,7 @@ export const DeleteTasks= () => {
     const taskId = '0ea9ff25-0a8e-415e-b985-3565850aa331'
 
     useEffect(() => {
-        todolistApi.deleteTask(todolistId, taskId)
+        todolistApi.removeTask(todolistId, taskId)
             .then(res => {
 
             })
@@ -89,7 +89,7 @@ export const CreateTask = () => {
     const title = 'New task'
 
     useEffect(() => {
-        todolistApi.createTask(todolistId, title)
+        todolistApi.addTask(todolistId, title)
             .then(res => {
 
             })
@@ -102,7 +102,7 @@ export const UpdateTask = () => {
     const [state, setState] = useState<any>(null)
     const todolistId = 'a2c0e3e1-a082-49d3-ad07-05ef61bb6eb1'
     const taskId = 'e471da5f-e842-4b68-8aa2-cae362f18f9d'
-    const newStatus: TaskModelType = {
+    const newStatus: ChangeTaskModelType = {
         description: 'fsfsdfsd',
         title: 'UPDATE',
         status: TaskStatuses.New,
@@ -112,7 +112,7 @@ export const UpdateTask = () => {
     }
 
     useEffect(() => {
-        todolistApi.updateTask(todolistId, taskId, newStatus)
+        todolistApi.changeTask(todolistId, taskId, newStatus)
             .then(res => {
                 console.log(res.data)
             })

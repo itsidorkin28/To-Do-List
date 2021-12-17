@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../app/store";
-import {createTodolistThunk, setTodolistsThunk, TodolistDomainType} from "./todolists-reducer";
+import {addTodolistTC, setTodolistsTC, TodolistDomainType} from "./todolists-reducer";
 import {TasksStateType} from "./tasks-reducer";
 import {Grid, Paper} from "@mui/material";
 import {AddItemForm} from "../../components/AddItemForm/AddItemForm";
@@ -14,12 +14,12 @@ export const TodolistsList = React.memo(() => {
     const tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
 
     useEffect(() => {
-        dispatch(setTodolistsThunk())
+        dispatch(setTodolistsTC())
     }, [])
 
 
     const addTodolistHandler = useCallback((title: string) => {
-        dispatch(createTodolistThunk(title))
+        dispatch(addTodolistTC(title))
     }, [dispatch])
 
     return <>

@@ -23,8 +23,16 @@ export const EditableSpan = React.memo(({title, callBack}: EditableSpanType) => 
             editFalse()
         }
     }
+    const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => event.currentTarget.select()
     return (
-        edit ? <TextField variant={"standard"} value={newTitle} onKeyPress={onKeyPressHandler} onChange={onChangeHandler} onBlur={editFalse} autoFocus/> : <span onDoubleClick={editTrue}>{title}</span>
+        edit ? <TextField
+            onFocus={handleFocus}
+            variant={"standard"}
+            value={newTitle}
+            onKeyPress={onKeyPressHandler}
+            onChange={onChangeHandler}
+            onBlur={editFalse}
+            autoFocus/> : <span onDoubleClick={editTrue}>{title}</span>
     )
 })
 

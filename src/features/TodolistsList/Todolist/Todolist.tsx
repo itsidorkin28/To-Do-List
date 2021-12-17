@@ -6,13 +6,13 @@ import {Delete} from '@mui/icons-material';
 import {Task} from './Task/Task';
 import {
     changeTodolistFilter,
-    changeTodolistTitleThunk,
-    deleteTodolistThunk,
+    changeTodolistTitleTC,
+    removeTodolistTC,
     FilterValuesType
 } from '../todolists-reducer';
 import {TaskStatuses, TaskType} from '../../../api/todolist-api';
 import { useDispatch } from 'react-redux';
-import {changeTaskTitleThunk, createTaskThunk, removeTaskThunk, setTasksThunk} from "../tasks-reducer";
+import {addTaskTC, changeTaskTC, removeTaskTC, setTasksTC} from "../tasks-reducer";
 
 type PropsType = {
     todolistId: string
@@ -24,11 +24,11 @@ type PropsType = {
 export const Todolist = React.memo(({todolistId, ...props}: PropsType) => {
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(setTasksThunk(todolistId))
+        dispatch(setTasksTC(todolistId))
     }, [])
 
     const removeTodolistHandler = useCallback(() => {
-        dispatch(deleteTodolistThunk(todolistId))
+        dispatch(removeTodolistTC(todolistId))
     }, [dispatch, todolistId])
 
     const changeFilter = useCallback((value: FilterValuesType) => {
@@ -36,19 +36,19 @@ export const Todolist = React.memo(({todolistId, ...props}: PropsType) => {
     }, [dispatch, todolistId])
 
     const removeTaskHandler = useCallback((taskId: string) => {
-        dispatch(removeTaskThunk(todolistId, taskId))
+        dispatch(removeTaskTC(todolistId, taskId))
     }, [dispatch, todolistId])
 
     const addTaskHandler = useCallback((title: string) => {
-        dispatch(createTaskThunk(todolistId, title))
+        dispatch(addTaskTC(todolistId, title))
     }, [dispatch, todolistId])
 
     const updateTaskHandler = useCallback((taskID: string, title: string) => {
-        dispatch(changeTaskTitleThunk(taskID, title, todolistId))
+        dispatch(changeTaskTC(taskID, {title}, todolistId))
     }, [dispatch, todolistId])
 
     const changeTodolistTitle = useCallback((title: string) => {
-        dispatch(changeTodolistTitleThunk(todolistId, title))
+        dispatch(changeTodolistTitleTC(todolistId, title))
     }, [dispatch, todolistId])
 
 
