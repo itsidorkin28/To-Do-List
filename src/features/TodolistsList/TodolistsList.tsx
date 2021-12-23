@@ -15,7 +15,7 @@ export const TodolistsList = React.memo(() => {
 
     useEffect(() => {
         dispatch(setTodolistsTC())
-    }, [])
+    }, [dispatch])
 
 
     const addTodolistHandler = useCallback((title: string) => {

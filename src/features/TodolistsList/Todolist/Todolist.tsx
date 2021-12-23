@@ -11,8 +11,11 @@ import {
     FilterValuesType
 } from '../todolists-reducer';
 import {TaskStatuses, TaskType} from '../../../api/todolist-api';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {addTaskTC, changeTaskTC, removeTaskTC, setTasksTC} from "../tasks-reducer";
+import {AppStatusType} from "../../../app/app-reducer";
+import {AppRootStateType} from "../../../app/store";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 type PropsType = {
     todolistId: string
@@ -23,9 +26,12 @@ type PropsType = {
 
 export const Todolist = React.memo(({todolistId, ...props}: PropsType) => {
     const dispatch = useDispatch()
+
+    const appStatus = useSelector<AppRootStateType, AppStatusType>(state => state.app.status)
+
     useEffect(() => {
         dispatch(setTasksTC(todolistId))
-    }, [])
+    }, [dispatch, todolistId])
 
     const removeTodolistHandler = useCallback(() => {
         dispatch(removeTodolistTC(todolistId))
@@ -63,9 +69,11 @@ export const Todolist = React.memo(({todolistId, ...props}: PropsType) => {
     return <div className='Todolist'>
 
         <h3><EditableSpan title={props.title} callBack={changeTodolistTitle}/>
-            <IconButton onClick={removeTodolistHandler}>
-                <Delete/>
-            </IconButton>
+            {appStatus === 'loading'
+                ? <CircularProgress />
+                : <IconButton onClick={removeTodolistHandler}>
+                    <Delete/>
+                </IconButton>}
         </h3>
         <AddItemForm callBack={addTaskHandler}/>
         <div>

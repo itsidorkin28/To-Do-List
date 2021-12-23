@@ -22,7 +22,7 @@ beforeEach(() => {
 })
 
 test('correct todolist should be removed', () => {
-    const endState = todolistsReducer(startState, {type: 'REMOVE-TODOLIST', id: todolistId1})
+    const endState = todolistsReducer(startState, {type: 'TODOS/REMOVE-TODOLIST', id: todolistId1})
 
     expect(endState.length).toBe(1)
     expect(endState[0].id).toBe(todolistId2)
