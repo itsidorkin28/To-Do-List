@@ -1,18 +1,29 @@
-import { TextField } from '@mui/material';
+import {TextField} from '@mui/material';
 import React, {ChangeEvent, KeyboardEvent, useCallback, useState} from 'react';
+import {useDispatch} from 'react-redux';
+import {AppStatusType} from "../../app/app-reducer";
+import {changeTaskEntityStatus} from "../../features/TodolistsList/tasks-reducer";
 
 type EditableSpanType = {
     title: string
     callBack: (title: string) => void
+    disabled?: boolean
 }
-export const EditableSpan = React.memo(({title, callBack}: EditableSpanType) => {
+export const EditableSpan = React.memo(({
+                                            title,
+                                            disabled = false,
+                                            callBack
+                                        }: EditableSpanType) => {
+
     const [edit, setEdit] = useState<boolean>(false)
     const [newTitle, setNewTitle] = useState(title)
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setNewTitle(e.currentTarget.value)
     }
     const editTrue = () => {
-        setEdit(true)
+        if (!disabled) {
+            setEdit(true)
+        }
     }
     const editFalse = useCallback(() => {
         setEdit(false)
@@ -26,6 +37,7 @@ export const EditableSpan = React.memo(({title, callBack}: EditableSpanType) => 
     const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => event.currentTarget.select()
     return (
         edit ? <TextField
+            disabled={disabled}
             onFocus={handleFocus}
             variant={"standard"}
             value={newTitle}

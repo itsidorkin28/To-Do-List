@@ -14,8 +14,11 @@ import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import {ErrorSnackbar} from "../components/ErrorSnackbar/ErrorSnackbar";
 
+type AppPropsType = {
+    demo?: boolean
+}
 
-export const App = React.memo(() => {
+export const App = React.memo(({demo = false}: AppPropsType) => {
     const appStatus = useSelector<AppRootStateType, AppStatusType>(state => state.app.status)
     return (
         <div className="App">
@@ -39,7 +42,7 @@ export const App = React.memo(() => {
                 {appStatus === 'loading' && <LinearProgress />}
             </AppBar>
             <Container fixed>
-                <TodolistsList/>
+                <TodolistsList demo={demo}/>
             </Container>
         </div>
     );

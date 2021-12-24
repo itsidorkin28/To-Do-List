@@ -1,12 +1,13 @@
 import {AppRootStateType} from "./store";
 import {Provider} from "react-redux";
 import React from "react";
-import {combineReducers, createStore} from "redux";
+import {applyMiddleware, combineReducers, createStore} from "redux";
 import {tasksReducer} from "../features/TodolistsList/tasks-reducer";
 import {todolistsReducer} from "../features/TodolistsList/todolists-reducer";
 import {v1} from "uuid";
 import {TaskPriorities, TaskStatuses} from "../api/todolist-api";
 import {appReducer} from "./app-reducer";
+import thunkMiddleware from "redux-thunk";
 
 const rootReducer = combineReducers({
     tasks: tasksReducer,
@@ -17,10 +18,10 @@ const rootReducer = combineReducers({
 const todoId1 = v1()
 const todoId2 = v1()
 
-const initialGlobalState = {
+const initialGlobalState: AppRootStateType = {
     todolists: [
-        {id: todoId1, title: "What to learn", filter: 'all', addedDate: '', order: 0},
-        {id: todoId2, title: "What to buy", filter: 'all', addedDate: '', order: 0},
+        {id: todoId1, title: "What to learn", filter: 'all', addedDate: '', order: 0, entityStatus: 'idle'},
+        {id: todoId2, title: "What to buy", filter: 'all', addedDate: '', order: 0, entityStatus: 'idle'},
     ],
     tasks: {
         [todoId1]: [
@@ -35,6 +36,7 @@ const initialGlobalState = {
                 order: 0,
                 priority: TaskPriorities.Low,
                 description: '',
+                taskEntityStatus: 'idle'
             },
         ],
         [todoId2]: [
@@ -49,6 +51,7 @@ const initialGlobalState = {
                 order: 0,
                 priority: TaskPriorities.Low,
                 description: '',
+                taskEntityStatus: 'idle'
             },
         ]
     },
@@ -58,7 +61,7 @@ const initialGlobalState = {
     }
 };
 
-export const storyBookStore = createStore(rootReducer, initialGlobalState as AppRootStateType);
+export const storyBookStore = createStore(rootReducer, initialGlobalState, applyMiddleware(thunkMiddleware));
 
 
 export const ReduxStoreProviderDecorator = (storyFn: () => React.ReactNode) => <Provider

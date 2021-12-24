@@ -1,7 +1,7 @@
 import {TaskPriorities, TaskStatuses} from "../../api/todolist-api";
 import {
     addTask,
-    changeTask,
+    changeTask, changeTaskEntityStatus,
     removeTask,
     setTasks,
     tasksReducer,
@@ -25,6 +25,7 @@ beforeEach(() => {
                 order: 0,
                 priority: TaskPriorities.Low,
                 description: '',
+                taskEntityStatus: 'idle'
             },
             {
                 id: '2',
@@ -37,6 +38,7 @@ beforeEach(() => {
                 order: 0,
                 priority: TaskPriorities.Low,
                 description: '',
+                taskEntityStatus: 'idle'
             },
             {
                 id: '3',
@@ -49,6 +51,7 @@ beforeEach(() => {
                 order: 0,
                 priority: TaskPriorities.Low,
                 description: '',
+                taskEntityStatus: 'idle'
             }
         ],
         "todolistId2": [
@@ -63,6 +66,7 @@ beforeEach(() => {
                 order: 0,
                 priority: TaskPriorities.Low,
                 description: '',
+                taskEntityStatus: 'idle'
             },
             {
                 id: '2',
@@ -75,6 +79,7 @@ beforeEach(() => {
                 order: 0,
                 priority: TaskPriorities.Low,
                 description: '',
+                taskEntityStatus: 'idle'
             },
             {
                 id: '3',
@@ -87,6 +92,7 @@ beforeEach(() => {
                 order: 0,
                 priority: TaskPriorities.Low,
                 description: '',
+                taskEntityStatus: 'idle'
             },
         ]
     };
@@ -109,6 +115,7 @@ test('correct task should be deleted from correct array', () => {
                 order: 0,
                 priority: TaskPriorities.Low,
                 description: '',
+                taskEntityStatus: 'idle'
             },
             {
                 id: '2',
@@ -121,6 +128,7 @@ test('correct task should be deleted from correct array', () => {
                 order: 0,
                 priority: TaskPriorities.Low,
                 description: '',
+                taskEntityStatus: 'idle'
             },
             {
                 id: '3',
@@ -133,6 +141,7 @@ test('correct task should be deleted from correct array', () => {
                 order: 0,
                 priority: TaskPriorities.Low,
                 description: '',
+                taskEntityStatus: 'idle'
             }
         ],
         "todolistId2": [
@@ -147,6 +156,7 @@ test('correct task should be deleted from correct array', () => {
                 order: 0,
                 priority: TaskPriorities.Low,
                 description: '',
+                taskEntityStatus: 'idle'
             },
             {
                 id: '3',
@@ -159,6 +169,7 @@ test('correct task should be deleted from correct array', () => {
                 order: 0,
                 priority: TaskPriorities.Low,
                 description: '',
+                taskEntityStatus: 'idle'
             },
         ]
     });
@@ -255,6 +266,13 @@ test('tasks should be added for todolists', () => {
 
     expect(endState['todolistId1'].length).toBe(3)
     expect(endState['todolistId2'].length).toBe(0)
+})
+
+test('tasks entity status should be changed', () => {
+    const action = changeTaskEntityStatus('1', 'todolistId1', 'loading')
+    const endState = tasksReducer(startState, action)
+
+    expect(endState['todolistId1'][0].taskEntityStatus).toBe('loading')
 
 })
 

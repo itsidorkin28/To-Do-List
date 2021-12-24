@@ -35,7 +35,7 @@ export const todolistApi = {
     }
 }
 
-type CommonResponseType<T> = {
+export type CommonResponseType<T> = {
     resultCode: number
     messages: Array<string>
     fieldErrors: Array<string>

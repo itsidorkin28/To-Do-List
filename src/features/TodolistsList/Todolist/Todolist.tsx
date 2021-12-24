@@ -10,27 +10,26 @@ import {
     removeTodolistTC,
     FilterValuesType
 } from '../todolists-reducer';
-import {TaskStatuses, TaskType} from '../../../api/todolist-api';
-import { useDispatch, useSelector } from 'react-redux';
-import {addTaskTC, changeTaskTC, removeTaskTC, setTasksTC} from "../tasks-reducer";
+import {TaskStatuses} from '../../../api/todolist-api';
+import {useDispatch} from 'react-redux';
+import {addTaskTC, changeTaskTC, removeTaskTC, setTasksTC, TaskDomainType} from "../tasks-reducer";
 import {AppStatusType} from "../../../app/app-reducer";
-import {AppRootStateType} from "../../../app/store";
-import CircularProgress from "@material-ui/core/CircularProgress";
+
 
 type PropsType = {
     todolistId: string
     title: string
-    tasks: Array<TaskType>
+    tasks: Array<TaskDomainType>
     filter: FilterValuesType
+    demo?: boolean
+    entityStatus: AppStatusType
 }
 
-export const Todolist = React.memo(({todolistId, ...props}: PropsType) => {
+export const Todolist = React.memo(({demo = false, entityStatus, todolistId, ...props}: PropsType) => {
     const dispatch = useDispatch()
 
-    const appStatus = useSelector<AppRootStateType, AppStatusType>(state => state.app.status)
-
     useEffect(() => {
-        dispatch(setTasksTC(todolistId))
+        if (!demo) dispatch(setTasksTC(todolistId))
     }, [dispatch, todolistId])
 
     const removeTodolistHandler = useCallback(() => {
@@ -69,13 +68,11 @@ export const Todolist = React.memo(({todolistId, ...props}: PropsType) => {
     return <div className='Todolist'>
 
         <h3><EditableSpan title={props.title} callBack={changeTodolistTitle}/>
-            {appStatus === 'loading'
-                ? <CircularProgress />
-                : <IconButton onClick={removeTodolistHandler}>
-                    <Delete/>
-                </IconButton>}
+            <IconButton onClick={removeTodolistHandler} disabled={entityStatus === 'loading'}>
+                <Delete/>
+            </IconButton>
         </h3>
-        <AddItemForm callBack={addTaskHandler}/>
+        <AddItemForm callBack={addTaskHandler} disabled={entityStatus === 'loading'}/>
         <div>
             <ul>
                 {
@@ -83,7 +80,9 @@ export const Todolist = React.memo(({todolistId, ...props}: PropsType) => {
                                                     task={t}
                                                     todolistId={todolistId}
                                                     removeTask={removeTaskHandler}
-                                                    updateTask={updateTaskHandler}/>
+                                                    updateTask={updateTaskHandler}
+                                                    taskEntityStatus={t.taskEntityStatus}
+                                                   />
                     )
                 }
             </ul>

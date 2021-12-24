@@ -7,14 +7,18 @@ import {Grid, Paper} from "@mui/material";
 import {AddItemForm} from "../../components/AddItemForm/AddItemForm";
 import {Todolist} from "./Todolist/Todolist";
 
-export const TodolistsList = React.memo(() => {
+type TodosListType = {
+    demo?: boolean
+}
+
+export const TodolistsList = React.memo(({demo = false}: TodosListType) => {
 
     const dispatch = useDispatch()
     const todolists = useSelector<AppRootStateType, Array<TodolistDomainType>>(state => state.todolists)
     const tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
 
     useEffect(() => {
-        dispatch(setTodolistsTC())
+        if (!demo) dispatch(setTodolistsTC())
     }, [dispatch])
 
 
@@ -40,6 +44,8 @@ export const TodolistsList = React.memo(() => {
                                     title={tl.title}
                                     tasks={tasksForTodolist}
                                     filter={tl.filter}
+                                    demo={demo}
+                                    entityStatus={tl.entityStatus}
                                 />
                             </Paper>
                         </Grid>
