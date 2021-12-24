@@ -1,6 +1,7 @@
 import {todolistApi, TodolistType} from "../../api/todolist-api";
 import {AppStatusType, setAppStatus} from "../../app/app-reducer";
 import {ThunkType} from "../../app/store";
+import {handlerServerNetworkError, handleServerAppError} from "../../utils/error-utils";
 
 export type FilterValuesType = "all" | "active" | "completed";
 
@@ -77,24 +78,56 @@ export const removeTodolistTC = (todolistId: string): ThunkType =>
     async dispatch => {
         dispatch(setAppStatus('loading'))
         dispatch(changeTodolistEntityStatus(todolistId, 'loading'))
-        await todolistApi.removeTodolist(todolistId)
-        dispatch(removeTodolist(todolistId))
-        dispatch(setAppStatus('succeeded'))
+        try {
+            const res = await todolistApi.removeTodolist(todolistId)
+            if (res.data.resultCode === 0) {
+                dispatch(removeTodolist(todolistId))
+                dispatch(setAppStatus('succeeded'))
+            } else {
+                handleServerAppError(res.data, dispatch)
+                dispatch(changeTodolistEntityStatus(todolistId, 'failed'))
+            }
+
+        } catch (e) {
+            handlerServerNetworkError((e as Error), dispatch)
+            dispatch(changeTodolistEntityStatus(todolistId, 'failed'))
+        }
     }
 
 export const addTodolistTC = (title: string): ThunkType =>
     async dispatch => {
         dispatch(setAppStatus('loading'))
-        const res = await todolistApi.addTodolist(title)
-        dispatch(addTodolist(res.data.data.item))
-        dispatch(setAppStatus('succeeded'))
+        try {
+            const res = await todolistApi.addTodolist(title)
+            if (res.data.resultCode === 0) {
+                dispatch(addTodolist(res.data.data.item))
+                dispatch(setAppStatus('succeeded'))
+            } else {
+                handleServerAppError(res.data, dispatch)
+            }
+        } catch (e) {
+            handlerServerNetworkError((e as Error), dispatch)
+
+        }
+
 
     }
 
 export const changeTodolistTitleTC = (todolistId: string, title: string): ThunkType =>
     async dispatch => {
-        await todolistApi.changeTodolistTitle(todolistId, title)
-        dispatch(changeTodolistTitle(todolistId, title))
+        dispatch(setAppStatus('loading'))
+        try {
+            const res = await todolistApi.changeTodolistTitle(todolistId, title)
+            if (res.data.resultCode === 0) {
+                dispatch(changeTodolistTitle(todolistId, title))
+                dispatch(setAppStatus('succeeded'))
+            } else {
+                handleServerAppError(res.data, dispatch)
+            }
+        } catch (e) {
+            handlerServerNetworkError((e as Error), dispatch)
+        }
+
     }
 
 

@@ -30,7 +30,7 @@ export const Todolist = React.memo(({demo = false, entityStatus, todolistId, ...
 
     useEffect(() => {
         if (!demo) dispatch(setTasksTC(todolistId))
-    }, [dispatch, todolistId])
+    }, [dispatch, todolistId, demo])
 
     const removeTodolistHandler = useCallback(() => {
         dispatch(removeTodolistTC(todolistId))
@@ -67,7 +67,7 @@ export const Todolist = React.memo(({demo = false, entityStatus, todolistId, ...
 
     return <div className='Todolist'>
 
-        <h3><EditableSpan title={props.title} callBack={changeTodolistTitle}/>
+        <h3><EditableSpan title={props.title} callBack={changeTodolistTitle} disabled={entityStatus === 'loading'}/>
             <IconButton onClick={removeTodolistHandler} disabled={entityStatus === 'loading'}>
                 <Delete/>
             </IconButton>
