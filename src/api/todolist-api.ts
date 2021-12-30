@@ -35,6 +35,34 @@ export const todolistApi = {
     }
 }
 
+export const authAPI = {
+    autMe() {
+      return instance.get<CommonResponseType<AuthMeType>>(`auth/me`)
+    },
+    login(data: LoginPramsType) {
+        return instance.post<CommonResponseType<{userId: number}>>(`auth/login/`, data)
+    },
+    logout() {
+        return instance.delete<CommonResponseType<{}>>(`auth/login`)
+    }
+}
+
+// Types
+
+type AuthMeType = {
+    id: number
+    email: string
+    login: string
+}
+
+export type LoginPramsType = {
+    email: string
+    password: string
+    rememberMe?: boolean
+    captcha?: boolean
+}
+
+
 export type CommonResponseType<T> = {
     resultCode: number
     messages: Array<string>

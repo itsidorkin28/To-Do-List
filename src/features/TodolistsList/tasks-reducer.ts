@@ -1,5 +1,5 @@
 import {
-    AddTodolistType, changeTodolistEntityStatus, RemoveTodolistType,
+    AddTodolistType, RemoveTodolistType,
     SetTodolistType
 } from "./todolists-reducer";
 import {ChangeTaskModelType, TaskPriorities, TaskStatuses, TaskType, todolistApi} from "../../api/todolist-api";
@@ -49,7 +49,12 @@ export const tasksReducer = (state = initialState, action: TasksActionsType): Ta
         case 'TASKS/SET-TASKS':
             return {...state, [action.todolistId]: action.tasks.map(t => ({...t, taskEntityStatus: 'idle'}))}
         case 'TASKS/CHANGE-TASK-ENTITY-STATUS':
-            return {...state, [action.todolistId]: state[action.todolistId].map(t => t.id === action.taskId ? {...t, taskEntityStatus: action.entityStatus} : t)}
+            return {...state,
+                [action.todolistId]: state[action.todolistId].map(t => t.id === action.taskId ? {
+                    ...t,
+                    taskEntityStatus: action.entityStatus
+                } : t)
+            }
         default:
             return state
     }

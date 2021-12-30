@@ -6,6 +6,7 @@ import {TasksStateType} from "./tasks-reducer";
 import {Grid, Paper} from "@mui/material";
 import {AddItemForm} from "../../components/AddItemForm/AddItemForm";
 import {Todolist} from "./Todolist/Todolist";
+import {Navigate} from "react-router-dom";
 
 type TodosListType = {
     demo?: boolean
@@ -16,16 +17,22 @@ export const TodolistsList = React.memo(({demo = false}: TodosListType) => {
     const dispatch = useDispatch()
     const todolists = useSelector<AppRootStateType, Array<TodolistDomainType>>(state => state.todolists)
     const tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
+    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
 
     useEffect(() => {
+        if (!isLoggedIn) {
+            return
+        }
         if (!demo) dispatch(setTodolistsTC())
-    }, [dispatch])
+    }, [dispatch, demo, isLoggedIn])
 
 
     const addTodolistHandler = useCallback((title: string) => {
         dispatch(addTodolistTC(title))
     }, [dispatch])
-
+    if (!isLoggedIn) {
+        return <Navigate to={'/login'}/>
+    }
     return <>
         <Grid container style={{padding: '20px 0'}}>
             <AddItemForm callBack={addTodolistHandler}/>
@@ -54,4 +61,6 @@ export const TodolistsList = React.memo(({demo = false}: TodosListType) => {
             }
         </Grid>
     </>
+
+
 })

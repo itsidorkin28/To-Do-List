@@ -1,8 +1,5 @@
 import {TextField} from '@mui/material';
 import React, {ChangeEvent, KeyboardEvent, useCallback, useState} from 'react';
-import {useDispatch} from 'react-redux';
-import {AppStatusType} from "../../app/app-reducer";
-import {changeTaskEntityStatus} from "../../features/TodolistsList/tasks-reducer";
 
 type EditableSpanType = {
     title: string
