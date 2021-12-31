@@ -47,13 +47,7 @@ export const App = React.memo(({demo = false}: AppPropsType) => {
             <ErrorSnackbar/>
             <AppBar position="static">
                 <Toolbar>
-                    <IconButton
-                        size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="menu"
-                        sx={{mr: 2}}
-                    >
+                    <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{mr: 2}}>
                         <Menu/>
                     </IconButton>
                     <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
@@ -61,8 +55,8 @@ export const App = React.memo(({demo = false}: AppPropsType) => {
                     </Typography>
                     {isLoggedIn && <Button color="inherit" onClick={logoutHandler}>Log out</Button>}
                 </Toolbar>
-                {appStatus === 'loading' && <LinearProgress/>}
             </AppBar>
+            <div style={{width: '100%', height: '5px'}}>{appStatus === 'loading' && <LinearProgress/>}</div>
             <Container fixed>
                 <Routes>
                     <Route path={'/'} element={<TodolistsList demo={demo}/>}/>

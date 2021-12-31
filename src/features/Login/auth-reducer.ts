@@ -1,7 +1,8 @@
 import {SetAppErrorType, setAppStatus, SetAppStatusType} from "../../app/app-reducer";
 import {ThunkType} from "../../app/store";
-import {authAPI, LoginPramsType} from "../../api/todolist-api";
 import {handlerServerNetworkError, handleServerAppError} from "../../utils/error-utils";
+import {authAPI, LoginPramsType} from "../../api/auth-api";
+import {clearTodosData} from "../TodolistsList/todolists-reducer";
 
 const initialState = {
     isLoggedIn: false as boolean
@@ -45,6 +46,7 @@ export const logoutTC = (): ThunkType => async dispatch => {
         if (res.data.resultCode === 0) {
             dispatch(setIsLoggedIn(false))
             dispatch(setAppStatus('succeeded'))
+            dispatch(clearTodosData())
         } else {
             handleServerAppError(res.data, dispatch)
         }

@@ -12,7 +12,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {loginTC} from "./auth-reducer";
 import {AppRootStateType} from '../../app/store';
 import {Navigate} from 'react-router-dom';
-import {LoginPramsType} from "../../api/todolist-api";
+import {LoginPramsType} from "../../api/auth-api";
 
 
 export const Login = () => {

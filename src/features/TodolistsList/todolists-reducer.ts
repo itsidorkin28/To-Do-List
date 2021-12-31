@@ -2,15 +2,9 @@ import {todolistApi, TodolistType} from "../../api/todolist-api";
 import {AppStatusType, setAppStatus} from "../../app/app-reducer";
 import {ThunkType} from "../../app/store";
 import {handlerServerNetworkError, handleServerAppError} from "../../utils/error-utils";
+import {fetchTasksTC} from "./tasks-reducer";
 
-export type FilterValuesType = "all" | "active" | "completed";
-
-export type TodolistDomainType = TodolistType & {
-    filter: FilterValuesType
-    entityStatus: AppStatusType
-}
 const initialState: Array<TodolistDomainType> = []
-
 
 export const todolistsReducer = (state = initialState, action: TodolistsActionsType): Array<TodolistDomainType> => {
     switch (action.type) {
@@ -27,23 +21,14 @@ export const todolistsReducer = (state = initialState, action: TodolistsActionsT
             return state.map(m => m.id === action.id ? {...m, filter: action.filter} : m)
         case 'TODOS/CHANGE-TODOLIST-ENTITY-STATUS':
             return state.map(m => m.id === action.id ? {...m, entityStatus: action.entityStatus} : m)
+        case 'TODOS/CLEAR-TODOS-DATA': 
+            return []
         default:
             return state
     }
 }
 
-export type TodolistsActionsType =
-    RemoveTodolistType
-    | AddTodolistType
-    | ReturnType<typeof changeTodolistTitle>
-    | ReturnType<typeof changeTodolistFilter>
-    | SetTodolistType
-    | ReturnType<typeof changeTodolistEntityStatus>
-
-export type AddTodolistType = ReturnType<typeof addTodolist>
-export type RemoveTodolistType = ReturnType<typeof removeTodolist>
-export type SetTodolistType = ReturnType<typeof setTodolists>
-
+// Actions
 
 export const setTodolists = (todolists: Array<TodolistType>) => {
     return {type: 'TODOS/SET-TODOLISTS', todolists} as const
@@ -63,15 +48,28 @@ export const changeTodolistFilter = (id: string, filter: FilterValuesType) => {
 export const changeTodolistEntityStatus = (id: string, entityStatus: AppStatusType) => {
     return {type: 'TODOS/CHANGE-TODOLIST-ENTITY-STATUS', id, entityStatus} as const
 }
+export const clearTodosData = () => ({type: 'TODOS/CLEAR-TODOS-DATA'} as const)
 
-// Thunk
+// Thunks
 
-export const setTodolistsTC = (): ThunkType =>
+export const fetchTodolistsTC = (): ThunkType =>
     async dispatch => {
         dispatch(setAppStatus('loading'))
-        const res = await todolistApi.getTodolists()
-        dispatch(setTodolists(res.data))
-        dispatch(setAppStatus('succeeded'))
+        try {
+            const res = await todolistApi.getTodolists()
+            dispatch(setTodolists(res.data))
+            try {
+                const res = await todolistApi.getTodolists()
+                res.data.forEach(tl => {
+                    dispatch(fetchTasksTC(tl.id))
+                    dispatch(setAppStatus('succeeded'))
+                })
+            } catch (e) {
+                handlerServerNetworkError((e as Error), dispatch)
+            }
+        } catch (e) {
+            handlerServerNetworkError((e as Error), dispatch)
+        }
     }
 
 export const removeTodolistTC = (todolistId: string): ThunkType =>
@@ -130,4 +128,25 @@ export const changeTodolistTitleTC = (todolistId: string, title: string): ThunkT
 
     }
 
+// Types
 
+export type FilterValuesType = "all" | "active" | "completed";
+
+export type TodolistDomainType = TodolistType & {
+    filter: FilterValuesType
+    entityStatus: AppStatusType
+}
+
+export type TodolistsActionsType =
+    RemoveTodolistType
+    | AddTodolistType
+    | ReturnType<typeof changeTodolistTitle>
+    | ReturnType<typeof changeTodolistFilter>
+    | SetTodolistType
+    | ReturnType<typeof changeTodolistEntityStatus>
+    | ClearTodosData
+
+export type AddTodolistType = ReturnType<typeof addTodolist>
+export type RemoveTodolistType = ReturnType<typeof removeTodolist>
+export type SetTodolistType = ReturnType<typeof setTodolists>
+export type ClearTodosData = ReturnType<typeof clearTodosData>

@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../app/store";
-import {addTodolistTC, setTodolistsTC, TodolistDomainType} from "./todolists-reducer";
+import {addTodolistTC, fetchTodolistsTC, TodolistDomainType} from "./todolists-reducer";
 import {TasksStateType} from "./tasks-reducer";
 import {Grid, Paper} from "@mui/material";
 import {AddItemForm} from "../../components/AddItemForm/AddItemForm";
@@ -23,7 +23,7 @@ export const TodolistsList = React.memo(({demo = false}: TodosListType) => {
         if (!isLoggedIn) {
             return
         }
-        if (!demo) dispatch(setTodolistsTC())
+        if (!demo) dispatch(fetchTodolistsTC())
     }, [dispatch, demo, isLoggedIn])
 
 
@@ -51,7 +51,6 @@ export const TodolistsList = React.memo(({demo = false}: TodosListType) => {
                                     title={tl.title}
                                     tasks={tasksForTodolist}
                                     filter={tl.filter}
-                                    demo={demo}
                                     entityStatus={tl.entityStatus}
                                 />
                             </Paper>
