@@ -1,12 +1,12 @@
-import React, {useCallback, useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "../../app/store";
-import {addTodolistTC, fetchTodolistsTC, TodolistDomainType} from "./todolists-reducer";
-import {TasksStateType} from "./tasks-reducer";
-import {Grid, Paper} from "@mui/material";
-import {AddItemForm} from "../../components/AddItemForm/AddItemForm";
-import {Todolist} from "./Todolist/Todolist";
-import {Navigate} from "react-router-dom";
+import React, {useCallback, useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {AppRootStateType} from '../../app/store';
+import {addTodolistTC, fetchTodolistsTC, TodolistDomainType} from './todolists-reducer';
+import {TasksStateType} from './tasks-reducer';
+import {Grid, Paper} from '@mui/material';
+import {AddItemForm} from '../../components/AddItemForm/AddItemForm';
+import {Todolist} from './Todolist/Todolist';
+import {Navigate} from 'react-router-dom';
 
 type TodosListType = {
     demo?: boolean

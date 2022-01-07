@@ -1,14 +1,14 @@
-import {todolistApi, TodolistType} from "../../api/todolist-api";
-import {AppStatusType, setAppStatus} from "../../app/app-reducer";
-import {ThunkType} from "../../app/store";
-import {handlerServerNetworkError, handleServerAppError} from "../../utils/error-utils";
-import {fetchTasksTC} from "./tasks-reducer";
+import {todolistApi, TodolistType} from '../../api/todolist-api';
+import {AppStatusType, setAppStatus} from '../../app/app-reducer';
+import {ThunkType} from '../../app/store';
+import {handlerServerNetworkError, handleServerAppError} from '../../utils/error-utils';
+import {fetchTasksTC} from './tasks-reducer';
 
 const initialState: Array<TodolistDomainType> = []
 
 export const todolistsReducer = (state = initialState, action: TodolistsActionsType): Array<TodolistDomainType> => {
     switch (action.type) {
-        case "TODOS/SET-TODOLISTS":
+        case 'TODOS/SET-TODOLISTS':
             return action.todolists.map(tl => ({...tl, filter: 'all', entityStatus: 'idle'}))
         case 'TODOS/ADD-TODOLIST':
             const newTodolist: TodolistDomainType = {...action.todolist, filter: 'all', entityStatus: 'idle'}
@@ -21,7 +21,7 @@ export const todolistsReducer = (state = initialState, action: TodolistsActionsT
             return state.map(m => m.id === action.id ? {...m, filter: action.filter} : m)
         case 'TODOS/CHANGE-TODOLIST-ENTITY-STATUS':
             return state.map(m => m.id === action.id ? {...m, entityStatus: action.entityStatus} : m)
-        case 'TODOS/CLEAR-TODOS-DATA': 
+        case 'TODOS/CLEAR-TODOS-DATA':
             return []
         default:
             return state
@@ -130,7 +130,7 @@ export const changeTodolistTitleTC = (todolistId: string, title: string): ThunkT
 
 // Types
 
-export type FilterValuesType = "all" | "active" | "completed";
+export type FilterValuesType = 'all' | 'active' | 'completed';
 
 export type TodolistDomainType = TodolistType & {
     filter: FilterValuesType

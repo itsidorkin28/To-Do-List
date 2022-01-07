@@ -1,14 +1,14 @@
-import {AppRootStateType} from "./store";
-import {Provider} from "react-redux";
-import React from "react";
-import {applyMiddleware, combineReducers, createStore} from "redux";
-import {tasksReducer} from "../features/TodolistsList/tasks-reducer";
-import {todolistsReducer} from "../features/TodolistsList/todolists-reducer";
-import {v1} from "uuid";
-import {TaskPriorities, TaskStatuses} from "../api/todolist-api";
-import {appReducer} from "./app-reducer";
-import thunkMiddleware from "redux-thunk";
-import {authReducer} from "../features/Login/auth-reducer";
+import {AppRootStateType} from './store';
+import {Provider} from 'react-redux';
+import React from 'react';
+import {applyMiddleware, combineReducers, createStore} from 'redux';
+import {tasksReducer} from '../features/TodolistsList/tasks-reducer';
+import {todolistsReducer} from '../features/TodolistsList/todolists-reducer';
+import {v1} from 'uuid';
+import {TaskPriorities, TaskStatuses} from '../api/todolist-api';
+import {appReducer} from './app-reducer';
+import thunkMiddleware from 'redux-thunk';
+import {authReducer} from '../features/Login/auth-reducer';
 
 const rootReducer = combineReducers({
     tasks: tasksReducer,
@@ -22,8 +22,8 @@ const todoId2 = v1()
 
 const initialGlobalState: AppRootStateType = {
     todolists: [
-        {id: todoId1, title: "What to learn", filter: 'all', addedDate: '', order: 0, entityStatus: 'idle'},
-        {id: todoId2, title: "What to buy", filter: 'all', addedDate: '', order: 0, entityStatus: 'idle'},
+        {id: todoId1, title: 'What to learn', filter: 'all', addedDate: '', order: 0, entityStatus: 'idle'},
+        {id: todoId2, title: 'What to buy', filter: 'all', addedDate: '', order: 0, entityStatus: 'idle'},
     ],
     tasks: {
         [todoId1]: [

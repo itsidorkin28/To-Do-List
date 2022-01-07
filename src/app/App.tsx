@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
 import './App.css';
 import {Menu} from '@mui/icons-material';
-import {TodolistsList} from "../features/TodolistsList/TodolistsList";
-import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "./store";
-import {AppStatusType, initializeAppTC} from "./app-reducer";
+import {TodolistsList} from '../features/TodolistsList/TodolistsList';
+import {useDispatch, useSelector} from 'react-redux';
+import {AppRootStateType} from './store';
+import {AppStatusType, initializeAppTC} from './app-reducer';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Toolbar from '@mui/material/Toolbar';
 import AppBar from '@mui/material/AppBar';
@@ -12,11 +12,11 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
-import {ErrorSnackbar} from "../components/ErrorSnackbar/ErrorSnackbar";
-import {Login} from "../features/Login/Login";
-import {Navigate, Route, Routes} from "react-router-dom";
+import {ErrorSnackbar} from '../components/ErrorSnackbar/ErrorSnackbar';
+import {Login} from '../features/Login/Login';
+import {Navigate, Route, Routes} from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
-import {logoutTC} from "../features/Login/auth-reducer";
+import {logoutTC} from '../features/Login/auth-reducer';
 
 type AppPropsType = {
     demo?: boolean
@@ -43,17 +43,17 @@ export const App = React.memo(({demo = false}: AppPropsType) => {
     }
 
     return (
-        <div className="App">
+        <div className='App'>
             <ErrorSnackbar/>
-            <AppBar position="static">
+            <AppBar position='static'>
                 <Toolbar>
-                    <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{mr: 2}}>
+                    <IconButton size='large' edge='start' color='inherit' aria-label='menu' sx={{mr: 2}}>
                         <Menu/>
                     </IconButton>
-                    <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
-                        TO DO LISTd
+                    <Typography variant='h6' component='div' sx={{flexGrow: 1}}>
+                        TO DO LIST
                     </Typography>
-                    {isLoggedIn && <Button color="inherit" onClick={logoutHandler}>Log out</Button>}
+                    {isLoggedIn && <Button color='inherit' onClick={logoutHandler}>Log out</Button>}
                 </Toolbar>
             </AppBar>
             <div style={{width: '100%', height: '5px'}}>{appStatus === 'loading' && <LinearProgress/>}</div>

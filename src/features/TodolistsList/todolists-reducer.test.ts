@@ -1,12 +1,12 @@
-import {v1} from "uuid";
+import {v1} from 'uuid';
 import {
     addTodolist, changeTodolistEntityStatus,
     changeTodolistFilter,
     changeTodolistTitle, FilterValuesType, setTodolists,
     TodolistDomainType,
     todolistsReducer,
-} from "./todolists-reducer";
-import {AppStatusType} from "../../app/app-reducer";
+} from './todolists-reducer';
+import {AppStatusType} from '../../app/app-reducer';
 
 let todolistId1: string
 let todolistId2: string
@@ -30,7 +30,7 @@ test('correct todolist should be removed', () => {
 })
 
 test('correct todolist should be added', () => {
-    const newTodolist =  {id: 'todolistId3', title: 'New todolist', filter: 'all', addedDate: '', order: 0}
+    const newTodolist = {id: 'todolistId3', title: 'New todolist', filter: 'all', addedDate: '', order: 0}
     const action = addTodolist(newTodolist)
     const endState = todolistsReducer(startState, action)
 

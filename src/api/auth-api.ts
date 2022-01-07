@@ -1,4 +1,4 @@
-import {CommonResponseType} from "./todolist-api";
+import {CommonResponseType} from './todolist-api';
 import axios from 'axios'
 
 const instance = axios.create({

@@ -1,7 +1,7 @@
-import {ThunkType} from "./store";
-import {handlerServerNetworkError, handleServerAppError} from "../utils/error-utils";
-import {setIsLoggedIn} from "../features/Login/auth-reducer";
-import {authAPI} from "../api/auth-api";
+import {ThunkType} from './store';
+import {handlerServerNetworkError, handleServerAppError} from '../utils/error-utils';
+import {setIsLoggedIn} from '../features/Login/auth-reducer';
+import {authAPI} from '../api/auth-api';
 
 export type AppStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 export type AppErrorType = string | null

@@ -1,8 +1,8 @@
-import {SetAppErrorType, setAppStatus, SetAppStatusType} from "../../app/app-reducer";
-import {ThunkType} from "../../app/store";
-import {handlerServerNetworkError, handleServerAppError} from "../../utils/error-utils";
-import {authAPI, LoginPramsType} from "../../api/auth-api";
-import {clearTodosData} from "../TodolistsList/todolists-reducer";
+import {SetAppErrorType, setAppStatus, SetAppStatusType} from '../../app/app-reducer';
+import {ThunkType} from '../../app/store';
+import {handlerServerNetworkError, handleServerAppError} from '../../utils/error-utils';
+import {authAPI, LoginPramsType} from '../../api/auth-api';
+import {clearTodosData} from '../TodolistsList/todolists-reducer';
 
 const initialState = {
     isLoggedIn: false as boolean

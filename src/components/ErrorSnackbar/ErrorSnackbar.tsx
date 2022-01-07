@@ -1,15 +1,15 @@
 import * as React from 'react';
 import Snackbar from '@mui/material/Snackbar';
-import MuiAlert, { AlertProps } from '@mui/material/Alert';
-import {AppErrorType, setAppError} from "../../app/app-reducer";
-import {useDispatch, useSelector } from 'react-redux';
-import {AppRootStateType} from "../../app/store";
+import MuiAlert, {AlertProps} from '@mui/material/Alert';
+import {AppErrorType, setAppError} from '../../app/app-reducer';
+import {useDispatch, useSelector} from 'react-redux';
+import {AppRootStateType} from '../../app/store';
 
-const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function (
     props,
     ref,
 ) {
-    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+    return <MuiAlert elevation={6} ref={ref} variant='filled' {...props} />;
 })
 
 export function ErrorSnackbar() {
@@ -25,11 +25,12 @@ export function ErrorSnackbar() {
     }
 
     return (
-            <Snackbar open={isOpen} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{horizontal: 'center', vertical: 'bottom'}}>
-                <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-                    {error}
-                </Alert>
-            </Snackbar>
+        <Snackbar open={isOpen} autoHideDuration={6000} onClose={handleClose}
+                  anchorOrigin={{horizontal: 'center', vertical: 'bottom'}}>
+            <Alert onClose={handleClose} severity='error' sx={{width: '100%'}}>
+                {error}
+            </Alert>
+        </Snackbar>
 
     )
 }

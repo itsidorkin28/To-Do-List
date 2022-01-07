@@ -1,11 +1,11 @@
 import {
     AddTodolistType, ClearTodosData, RemoveTodolistType,
     SetTodolistType
-} from "./todolists-reducer";
-import {ChangeTaskModelType, TaskPriorities, TaskStatuses, TaskType, todolistApi} from "../../api/todolist-api";
-import {AppRootStateType, ThunkType} from "../../app/store";
-import {AppStatusType, setAppStatus} from "../../app/app-reducer";
-import {handlerServerNetworkError, handleServerAppError} from "../../utils/error-utils";
+} from './todolists-reducer';
+import {ChangeTaskModelType, TaskPriorities, TaskStatuses, TaskType, todolistApi} from '../../api/todolist-api';
+import {AppRootStateType, ThunkType} from '../../app/store';
+import {AppStatusType, setAppStatus} from '../../app/app-reducer';
+import {handlerServerNetworkError, handleServerAppError} from '../../utils/error-utils';
 
 const initialState: TasksStateType = {}
 

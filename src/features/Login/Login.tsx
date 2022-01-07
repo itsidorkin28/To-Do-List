@@ -9,10 +9,10 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import {useFormik} from 'formik';
 import {useDispatch, useSelector} from 'react-redux';
-import {loginTC} from "./auth-reducer";
+import {loginTC} from './auth-reducer';
 import {AppRootStateType} from '../../app/store';
 import {Navigate} from 'react-router-dom';
-import {LoginPramsType} from "../../api/auth-api";
+import {LoginPramsType} from '../../api/auth-api';
 
 
 export const Login = () => {
@@ -63,11 +63,11 @@ export const Login = () => {
                         <p>Password: free</p>
                     </FormLabel>
                     <FormGroup>
-                        <TextField label="Email" margin="normal" type="email"
+                        <TextField label='Email' margin='normal' type='email'
                                    {...formik.getFieldProps('email')}/>
                         {formik.touched.email && formik.errors.email &&
                         <div style={{color: 'red'}}>{formik.errors.email}</div>}
-                        <TextField type="password" label="Password" margin="normal"
+                        <TextField type='password' label='Password' margin='normal'
                                    {...formik.getFieldProps('password')}
                         />
                         {formik.touched.password && formik.errors.password &&

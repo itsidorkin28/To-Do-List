@@ -68,7 +68,7 @@ export const GetTasks = () => {
     return <div> {JSON.stringify(state)}</div>
 }
 
-export const DeleteTasks= () => {
+export const DeleteTasks = () => {
     const [state, setState] = useState<any>(null)
     const todolistId = 'a2c0e3e1-a082-49d3-ad07-05ef61bb6eb1'
     const taskId = '0ea9ff25-0a8e-415e-b985-3565850aa331'

@@ -36,7 +36,7 @@ export const EditableSpan = React.memo(({
         edit ? <TextField
             disabled={disabled}
             onFocus={handleFocus}
-            variant={"standard"}
+            variant={'standard'}
             value={newTitle}
             onKeyPress={onKeyPressHandler}
             onChange={onChangeHandler}

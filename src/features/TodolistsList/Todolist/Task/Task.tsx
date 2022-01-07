@@ -1,11 +1,11 @@
 import React, {ChangeEvent, useCallback} from 'react';
-import {Checkbox, IconButton} from "@mui/material";
-import {EditableSpan} from "../../../../components/EditableSpan/EditableSpan";
-import {Delete} from "@mui/icons-material";
-import {TaskStatuses, TaskType} from "../../../../api/todolist-api";
-import {changeTaskTC} from "../../tasks-reducer";
+import {Checkbox, IconButton} from '@mui/material';
+import {EditableSpan} from '../../../../components/EditableSpan/EditableSpan';
+import {Delete} from '@mui/icons-material';
+import {TaskStatuses, TaskType} from '../../../../api/todolist-api';
+import {changeTaskTC} from '../../tasks-reducer';
 import {useDispatch} from 'react-redux';
-import {AppStatusType} from "../../../../app/app-reducer";
+import {AppStatusType} from '../../../../app/app-reducer';
 
 type TaskPropsType = {
     task: TaskType
@@ -24,7 +24,7 @@ export const Task = React.memo(({taskEntityStatus, task, updateTask, removeTask,
         dispatch(changeTaskTC(task.id, {status: newIsDoneValue ? TaskStatuses.Completed : TaskStatuses.New}, todolistId))
     }, [dispatch, todolistId, task.id])
 
-    return <li className={task.status === TaskStatuses.Completed ? "is-done" : ""}>
+    return <li className={task.status === TaskStatuses.Completed ? 'is-done' : ''}>
         <Checkbox
             disabled={taskEntityStatus === 'loading'}
             onChange={onChangeHandler}
