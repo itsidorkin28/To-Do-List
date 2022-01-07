@@ -51,7 +51,7 @@ export const App = React.memo(({demo = false}: AppPropsType) => {
                         <Menu/>
                     </IconButton>
                     <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
-                        TO DO LIST
+                        TO DO LISTd
                     </Typography>
                     {isLoggedIn && <Button color="inherit" onClick={logoutHandler}>Log out</Button>}
                 </Toolbar>
