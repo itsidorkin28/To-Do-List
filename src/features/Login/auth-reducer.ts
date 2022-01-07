@@ -42,6 +42,7 @@ export const loginTC =
 			if (res.data.resultCode === 0) {
 				dispatch(setIsLoggedIn(true));
 				dispatch(setAppStatus('succeeded'));
+				
 			} else {
 				handleServerAppError(res.data, dispatch);
 			}
