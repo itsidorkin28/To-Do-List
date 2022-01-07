@@ -8,7 +8,7 @@
         "prefer-for-of": true,
         "forin": true,
         "no-console": [
-            true,
+            false,
             "log",
             "error"
         ],
@@ -31,7 +31,7 @@
         "arrow-return-shorthand": true,
         "class-name": true,
         "file-name-casing": [
-            true,
+            false,
             "kebab-case"
         ],
         "prefer-switch": [
