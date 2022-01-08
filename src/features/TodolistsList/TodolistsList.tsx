@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppRootStateType } from '../../app/store';
+import { RootStateType } from '../../app/store';
 import {
 	addTodolistTC,
 	fetchTodolistsTC,
@@ -18,13 +18,13 @@ type TodosListType = {
 
 export const TodolistsList = React.memo(({ demo = false }: TodosListType) => {
 	const dispatch = useDispatch();
-	const todolists = useSelector<AppRootStateType, Array<TodolistDomainType>>(
+	const todolists = useSelector<RootStateType, Array<TodolistDomainType>>(
 		(state) => state.todolists
 	);
-	const tasks = useSelector<AppRootStateType, TasksStateType>(
+	const tasks = useSelector<RootStateType, TasksStateType>(
 		(state) => state.tasks
 	);
-	const isLoggedIn = useSelector<AppRootStateType, boolean>(
+	const isLoggedIn = useSelector<RootStateType, boolean>(
 		(state) => state.auth.isLoggedIn
 	);
 

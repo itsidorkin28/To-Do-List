@@ -6,15 +6,15 @@ import FormGroup from '@mui/material/FormGroup';
 import FormLabel from '@mui/material/FormLabel';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { useFormik } from 'formik';
-import { useDispatch, useSelector } from 'react-redux';
-import { loginTC } from './auth-reducer';
-import { AppRootStateType } from '../../app/store';
-import { Navigate } from 'react-router-dom';
-import { LoginPramsType } from '../../api/auth-api';
+import {useFormik} from 'formik';
+import {useDispatch, useSelector} from 'react-redux';
+import {loginTC} from './auth-reducer';
+import {RootStateType} from '../../app/store';
+import {Navigate} from 'react-router-dom';
+import {LoginPramsType} from '../../api/auth-api';
 
 export const Login = () => {
-	const isLoggedIn = useSelector<AppRootStateType, boolean>(
+	const isLoggedIn = useSelector<RootStateType, boolean>(
 		(state) => state.auth.isLoggedIn
 	);
 	const dispatch = useDispatch();
@@ -47,7 +47,7 @@ export const Login = () => {
 	});
 
 	if (isLoggedIn) {
-		return <Navigate to={'/'} />;
+		return <Navigate to={'/'}/>;
 	}
 	return (
 		<Grid container justifyContent={'center'}>
@@ -57,14 +57,8 @@ export const Login = () => {
 						<FormLabel>
 							<p>
 								To log in get registered
-								<a
-									href={
-										'https://social-network.samuraijs.com/'
-									}
-									target={'_blank'}
-								>
-									{' '}
-									here
+								<a href={'https://social-network.samuraijs.com/'} target={'_blank'}>
+									{' '} here
 								</a>
 							</p>
 							<p>or use common test account credentials:</p>
@@ -79,7 +73,7 @@ export const Login = () => {
 								{...formik.getFieldProps('email')}
 							/>
 							{formik.touched.email && formik.errors.email && (
-								<div style={{ color: 'red' }}>
+								<div style={{color: 'red'}}>
 									{formik.errors.email}
 								</div>
 							)}
@@ -90,11 +84,11 @@ export const Login = () => {
 								{...formik.getFieldProps('password')}
 							/>
 							{formik.touched.password &&
-								formik.errors.password && (
-									<div style={{ color: 'red' }}>
-										{formik.errors.password}
-									</div>
-								)}
+							formik.errors.password && (
+								<div style={{color: 'red'}}>
+									{formik.errors.password}
+								</div>
+							)}
 							<FormControlLabel
 								label={'Remember me'}
 								control={

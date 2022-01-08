@@ -9,7 +9,7 @@ import {
 	TodolistDomainType,
 	todolistsReducer,
 } from './todolists-reducer';
-import { AppStatusType } from '../../app/app-reducer';
+import { RequestStatusType } from '../../app/app-reducer';
 
 let todolistId1: string;
 let todolistId2: string;
@@ -86,7 +86,7 @@ test('correct filter of todolist should be changed', () => {
 });
 
 test('correct entity status of todolist should be changed', () => {
-	const newFilter: AppStatusType = 'loading';
+	const newFilter: RequestStatusType = 'loading';
 	const action = changeTodolistEntityStatus(todolistId1, newFilter);
 	const endState = todolistsReducer(startState, action);
 

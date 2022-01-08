@@ -3,8 +3,8 @@ import './App.css';
 import { Menu } from '@mui/icons-material';
 import { TodolistsList } from '../features/TodolistsList/TodolistsList';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppRootStateType } from './store';
-import { AppStatusType, initializeAppTC } from './app-reducer';
+import { RootStateType } from './store';
+import { RequestStatusType, initializeAppTC } from './app-reducer';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Toolbar from '@mui/material/Toolbar';
 import AppBar from '@mui/material/AppBar';
@@ -23,13 +23,13 @@ type AppPropsType = {
 };
 
 export const App = React.memo(({ demo = false }: AppPropsType) => {
-	const appStatus = useSelector<AppRootStateType, AppStatusType>(
+	const appStatus = useSelector<RootStateType, RequestStatusType>(
 		(state) => state.app.status
 	);
-	const isInitialized = useSelector<AppRootStateType, boolean>(
+	const isInitialized = useSelector<RootStateType, boolean>(
 		(state) => state.app.isInitialized
 	);
-	const isLoggedIn = useSelector<AppRootStateType, boolean>(
+	const isLoggedIn = useSelector<RootStateType, boolean>(
 		(state) => state.auth.isLoggedIn
 	);
 	const dispatch = useDispatch();

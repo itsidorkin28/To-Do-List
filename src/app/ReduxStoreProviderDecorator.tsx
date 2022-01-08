@@ -1,4 +1,4 @@
-import { AppRootStateType } from './store';
+import { RootStateType } from './store';
 import { Provider } from 'react-redux';
 import React from 'react';
 import { applyMiddleware, combineReducers, createStore } from 'redux';
@@ -20,7 +20,7 @@ const rootReducer = combineReducers({
 const todoId1 = v1();
 const todoId2 = v1();
 
-const initialGlobalState: AppRootStateType = {
+const initialGlobalState: RootStateType = {
 	todolists: [
 		{
 			id: todoId1,

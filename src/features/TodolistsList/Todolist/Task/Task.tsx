@@ -5,14 +5,14 @@ import { Delete } from '@mui/icons-material';
 import { TaskStatuses, TaskType } from '../../../../api/todolist-api';
 import { changeTaskTC } from '../../tasks-reducer';
 import { useDispatch } from 'react-redux';
-import { AppStatusType } from '../../../../app/app-reducer';
+import { RequestStatusType } from '../../../../app/app-reducer';
 
 type TaskPropsType = {
 	task: TaskType;
 	todolistId: string;
 	updateTask: (taskID: string, title: string) => void;
 	removeTask: (taskID: string) => void;
-	taskEntityStatus: AppStatusType;
+	taskEntityStatus: RequestStatusType;
 };
 
 export const Task = React.memo(

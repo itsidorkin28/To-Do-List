@@ -1,24 +1,24 @@
-import React, { useCallback } from 'react';
-import { AddItemForm } from '../../../components/AddItemForm/AddItemForm';
-import { EditableSpan } from '../../../components/EditableSpan/EditableSpan';
-import { Button, IconButton } from '@mui/material';
-import { Delete } from '@mui/icons-material';
-import { Task } from './Task/Task';
-import { changeTodolistFilter, changeTodolistTitleTC, removeTodolistTC, FilterValuesType } from '../todolists-reducer';
-import { TaskStatuses } from '../../../api/todolist-api';
-import { useDispatch } from 'react-redux';
-import { addTaskTC, changeTaskTC, removeTaskTC, TaskDomainType } from '../tasks-reducer';
-import { AppStatusType } from '../../../app/app-reducer';
+import React, {useCallback} from 'react';
+import {AddItemForm} from '../../../components/AddItemForm/AddItemForm';
+import {EditableSpan} from '../../../components/EditableSpan/EditableSpan';
+import {Button, IconButton} from '@mui/material';
+import {Delete} from '@mui/icons-material';
+import {Task} from './Task/Task';
+import {changeTodolistFilter, changeTodolistTitleTC, removeTodolistTC, FilterValuesType} from '../todolists-reducer';
+import {TaskStatuses} from '../../../api/todolist-api';
+import {useDispatch} from 'react-redux';
+import {addTaskTC, changeTaskTC, removeTaskTC, TaskDomainType} from '../tasks-reducer';
+import {RequestStatusType} from '../../../app/app-reducer';
 
 type PropsType = {
 	todolistId: string;
 	title: string;
 	tasks: Array<TaskDomainType>;
 	filter: FilterValuesType;
-	entityStatus: AppStatusType;
+	entityStatus: RequestStatusType;
 };
 
-export const Todolist = React.memo(({ entityStatus, todolistId, ...props }: PropsType) => {
+export const Todolist = React.memo(({entityStatus, todolistId, ...props}: PropsType) => {
 	const dispatch = useDispatch();
 
 	const removeTodolistHandler = useCallback(() => {
@@ -26,8 +26,8 @@ export const Todolist = React.memo(({ entityStatus, todolistId, ...props }: Prop
 	}, [dispatch, todolistId]);
 
 	const changeFilter = useCallback(
-		(value: FilterValuesType) => {
-			dispatch(changeTodolistFilter(todolistId, value));
+		(filter: FilterValuesType) => {
+			dispatch(changeTodolistFilter({todolistId, filter}));
 		},
 		[dispatch, todolistId]
 	);
@@ -48,7 +48,7 @@ export const Todolist = React.memo(({ entityStatus, todolistId, ...props }: Prop
 
 	const updateTaskHandler = useCallback(
 		(taskID: string, title: string) => {
-			dispatch(changeTaskTC(taskID, { title }, todolistId));
+			dispatch(changeTaskTC(taskID, {title}, todolistId));
 		},
 		[dispatch, todolistId]
 	);
@@ -77,10 +77,10 @@ export const Todolist = React.memo(({ entityStatus, todolistId, ...props }: Prop
 					disabled={entityStatus === 'loading'}
 				/>
 				<IconButton onClick={removeTodolistHandler} disabled={entityStatus === 'loading'}>
-					<Delete />
+					<Delete/>
 				</IconButton>
 			</h3>
-			<AddItemForm callBack={addTaskHandler} disabled={entityStatus === 'loading'} />
+			<AddItemForm callBack={addTaskHandler} disabled={entityStatus === 'loading'}/>
 			<div>
 				<ul>
 					{tasksForTodolist.map((t) => (
