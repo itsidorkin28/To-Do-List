@@ -1,4 +1,4 @@
-import { TaskPriorities, TaskStatuses } from '../../api/todolist-api';
+import {TaskPriorities, TaskStatuses} from '../../api/todolist-api';
 import {
 	addTask,
 	changeTask,
@@ -8,7 +8,7 @@ import {
 	tasksReducer,
 	TasksStateType,
 } from './tasks-reducer';
-import { addTodolist, removeTodolist, setTodolists } from './todolists-reducer';
+import {addTodolist, removeTodolist, setTodolists} from './todolists-reducer';
 
 let startState: TasksStateType;
 
@@ -100,7 +100,7 @@ beforeEach(() => {
 });
 
 test('correct task should be deleted from correct array', () => {
-	const action = removeTask('2', 'todolistId2');
+	const action = removeTask({taskId: '2', todolistId: 'todolistId2'});
 	const endState = tasksReducer(startState, action);
 
 	expect(endState).toEqual({
@@ -189,7 +189,7 @@ test('correct task should be added to correct array', () => {
 		priority: TaskPriorities.Low,
 		description: '',
 	};
-	const action = addTask(task);
+	const action = addTask({task});
 	const endState = tasksReducer(startState, action);
 
 	expect(endState['todolistId1'].length).toBe(3);
@@ -200,7 +200,7 @@ test('correct task should be added to correct array', () => {
 });
 
 test('status of specified task should be changed', () => {
-	const action = changeTask('2', { status: TaskStatuses.New }, 'todolistId2');
+	const action = changeTask({taskId: '2', model: {status: TaskStatuses.New}, todolistId: 'todolistId2'});
 	const endState = tasksReducer(startState, action);
 
 	expect(endState['todolistId2'].length).toBe(3);
@@ -209,7 +209,7 @@ test('status of specified task should be changed', () => {
 });
 
 test('title of specified task should be changed', () => {
-	const action = changeTask('1', { title: 'Vue' }, 'todolistId1');
+	const action = changeTask({taskId: '1', model: {title: 'Vue'}, todolistId: 'todolistId1'});
 	const endState = tasksReducer(startState, action);
 
 	expect(endState['todolistId1'].length).toBe(3);
@@ -218,14 +218,14 @@ test('title of specified task should be changed', () => {
 });
 
 test('new array should be added when new todolist is added', () => {
-	const newTodolist = {
+	const todolist = {
 		id: 'todolistId3',
 		title: 'New todolist',
 		filter: 'all',
 		addedDate: '',
 		order: 0,
 	};
-	const action = addTodolist(newTodolist);
+	const action = addTodolist({todolist});
 	const endState = tasksReducer(startState, action);
 
 	const keys = Object.keys(endState);
@@ -239,7 +239,7 @@ test('new array should be added when new todolist is added', () => {
 });
 
 test('property with todolistId should be deleted', () => {
-	const action = removeTodolist('todolistId2');
+	const action = removeTodolist({todolistId: 'todolistId2'});
 	const endState = tasksReducer(startState, action);
 	const keys = Object.keys(endState);
 
@@ -248,10 +248,12 @@ test('property with todolistId should be deleted', () => {
 });
 
 test('empty arrays should be added when we set todolists', () => {
-	const action = setTodolists([
-		{ id: '1', title: 'title 1', addedDate: '', order: 0 },
-		{ id: '2', title: 'title 2', addedDate: '', order: 0 },
-	]);
+	const action = setTodolists({
+		todolists: [
+			{id: '1', title: 'title 1', addedDate: '', order: 0},
+			{id: '2', title: 'title 2', addedDate: '', order: 0},
+		]
+	});
 
 	const endState = tasksReducer({}, action);
 
@@ -262,7 +264,7 @@ test('empty arrays should be added when we set todolists', () => {
 });
 
 test('tasks should be added for todolists', () => {
-	const action = setTasks('todolistId1', startState['todolistId1']);
+	const action = setTasks({todolistId: 'todolistId1', tasks: startState['todolistId1']});
 
 	const endState = tasksReducer(
 		{
@@ -277,7 +279,7 @@ test('tasks should be added for todolists', () => {
 });
 
 test('tasks entity status should be changed', () => {
-	const action = changeTaskEntityStatus('1', 'todolistId1', 'loading');
+	const action = changeTaskEntityStatus({taskId: '1', todolistId: 'todolistId1', entityStatus: 'loading'});
 	const endState = tasksReducer(startState, action);
 
 	expect(endState['todolistId1'][0].taskEntityStatus).toBe('loading');

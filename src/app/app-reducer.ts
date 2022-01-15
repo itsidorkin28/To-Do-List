@@ -13,6 +13,8 @@ const initialState = {
 	isInitialized: false as boolean,
 };
 
+export type AppInitialStateType = typeof initialState;
+
 const slice = createSlice({
 	name: 'app',
 	initialState,
