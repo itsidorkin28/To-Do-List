@@ -1,20 +1,25 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
-import { Task } from './Task';
-import { TaskPriorities, TaskStatuses } from '../../../../api/todolist-api';
+import {ComponentStory, ComponentMeta} from '@storybook/react';
+import {action} from '@storybook/addon-actions';
+import {Task} from './Task';
+import {TaskPriorities, TaskStatuses} from '../../../../api/todolist-api';
+import {storyBookStore} from '../../../../app/ReduxStoreProviderDecorator';
+import {Provider} from 'react-redux';
 
 export default {
 	title: 'Todolist/Task',
 	component: Task,
 	args: {
-		changeTaskStatus: action('changeTaskStatus'),
 		removeTask: action('removeTask'),
-		changeTask: action('updateTask'),
+		updateTask: action('updateTask'),
 	},
 } as ComponentMeta<typeof Task>;
 
 const Template: ComponentStory<typeof Task> = (args) => {
-	return <Task {...args} />;
+	return (
+		<Provider store={storyBookStore}>
+			<Task {...args} />
+		</Provider>
+	);
 };
 
 export const TaskIsDoneStory = Template.bind({});
@@ -33,6 +38,7 @@ TaskIsDoneStory.args = {
 		description: '',
 	},
 	todolistId: '1d23df4',
+	taskEntityStatus: 'idle',
 };
 
 export const TaskIsNotDoneStory = Template.bind({});
@@ -51,4 +57,5 @@ TaskIsNotDoneStory.args = {
 		description: '',
 	},
 	todolistId: '2d23df4',
+	taskEntityStatus: 'idle',
 };
