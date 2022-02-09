@@ -34,7 +34,7 @@ export const Todolist = React.memo(({entityStatus, todolistId, ...props}: PropsT
 
 	const removeTaskHandler = useCallback(
 		(taskId: string) => {
-			dispatch(removeTaskTC(todolistId, taskId));
+			dispatch(removeTaskTC({todolistId, taskId}));
 		},
 		[dispatch, todolistId]
 	);

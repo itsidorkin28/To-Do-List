@@ -3,9 +3,10 @@ import React, {
 	KeyboardEvent,
 	useCallback,
 	useState,
-} from 'react';
-import { IconButton, TextField } from '@mui/material';
-import { ControlPoint } from '@mui/icons-material';
+} from 'react'
+import s from './AddItemForm.module.scss'
+import {IconButton, TextField} from '@mui/material'
+import {ControlPoint} from '@mui/icons-material'
 
 export type AddItemFormType = {
 	callBack: (title: string) => void;
@@ -13,28 +14,28 @@ export type AddItemFormType = {
 };
 
 export const AddItemForm = React.memo(
-	({ disabled = false, callBack }: AddItemFormType) => {
-		const [title, setTitle] = useState('');
-		const [error, setError] = useState<boolean>(false);
+	({disabled = false, callBack}: AddItemFormType) => {
+		const [title, setTitle] = useState('')
+		const [error, setError] = useState<boolean>(false)
 		const onClickAddHandler = useCallback(() => {
 			if (title.trim()) {
-				callBack(title.trim());
-				setTitle('');
+				callBack(title.trim())
+				setTitle('')
 			} else {
-				setError(true);
+				setError(true)
 			}
-		}, [title, callBack]);
+		}, [title, callBack])
 		const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-			setError(false);
-			setTitle(e.currentTarget.value);
-		};
+			setError(false)
+			setTitle(e.currentTarget.value)
+		}
 		const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
 			if (e.key === 'Enter') {
-				onClickAddHandler();
+				onClickAddHandler()
 			}
-		};
+		}
 		return (
-			<div>
+			<div className={s.itemForm}>
 				<TextField
 					value={title}
 					disabled={disabled}
@@ -52,6 +53,6 @@ export const AddItemForm = React.memo(
 					<ControlPoint />
 				</IconButton>
 			</div>
-		);
-	}
-);
+		)
+	},
+)

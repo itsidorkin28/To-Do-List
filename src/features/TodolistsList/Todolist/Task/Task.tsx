@@ -1,11 +1,11 @@
-import React, { ChangeEvent, useCallback } from 'react';
-import { Checkbox, IconButton } from '@mui/material';
-import { EditableSpan } from '../../../../components/EditableSpan/EditableSpan';
-import { Delete } from '@mui/icons-material';
-import { TaskStatuses, TaskType } from '../../../../api/todolist-api';
-import { changeTaskTC } from '../../tasks-reducer';
-import { useDispatch } from 'react-redux';
-import { RequestStatusType } from '../../../../app/app-reducer';
+import React, {ChangeEvent, useCallback} from 'react'
+import {Checkbox, IconButton} from '@mui/material'
+import {EditableSpan} from '../../../../components/EditableSpan/EditableSpan'
+import {Delete} from '@mui/icons-material'
+import {TaskStatuses, TaskType} from '../../../../api/todolist-api'
+import {changeTaskTC} from '../../tasks-reducer'
+import {useDispatch} from 'react-redux'
+import {RequestStatusType} from '../../../../app/app-reducer'
 
 type TaskPropsType = {
 	task: TaskType;
@@ -17,17 +17,17 @@ type TaskPropsType = {
 
 export const Task = React.memo(
 	({
-		taskEntityStatus,
-		task,
-		updateTask,
-		removeTask,
-		todolistId,
-	}: TaskPropsType) => {
-		const dispatch = useDispatch();
+		 taskEntityStatus,
+		 task,
+		 updateTask,
+		 removeTask,
+		 todolistId,
+	 }: TaskPropsType) => {
+		const dispatch = useDispatch()
 
 		const onChangeHandler = useCallback(
 			(e: ChangeEvent<HTMLInputElement>) => {
-				const newIsDoneValue = e.currentTarget.checked;
+				const newIsDoneValue = e.currentTarget.checked
 				dispatch(
 					changeTaskTC(
 						task.id,
@@ -36,12 +36,12 @@ export const Task = React.memo(
 								? TaskStatuses.Completed
 								: TaskStatuses.New,
 						},
-						todolistId
-					)
-				);
+						todolistId,
+					),
+				)
 			},
-			[dispatch, todolistId, task.id]
-		);
+			[dispatch, todolistId, task.id],
+		)
 
 		return (
 			<li
@@ -67,6 +67,6 @@ export const Task = React.memo(
 					<Delete />
 				</IconButton>
 			</li>
-		);
-	}
-);
+		)
+	},
+)
